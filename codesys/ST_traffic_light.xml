@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://www.plcopen.org/xml/tc6_0200">
+  <fileHeader companyName="" productName="CODESYS" productVersion="CODESYS V3.5 SP15 Patch 3" creationDateTime="2020-12-19T08:49:31.180402" />
+  <contentHeader name="ST_traffic_light.project" modificationDateTime="2020-12-19T08:42:11.7060485">
+    <coordinateInfo>
+      <fbd>
+        <scaling x="1" y="1" />
+      </fbd>
+      <ld>
+        <scaling x="1" y="1" />
+      </ld>
+      <sfc>
+        <scaling x="1" y="1" />
+      </sfc>
+    </coordinateInfo>
+    <addData>
+      <data name="http://www.3s-software.com/plcopenxml/projectinformation" handleUnknown="implementation">
+        <ProjectInformation />
+      </data>
+    </addData>
+  </contentHeader>
+  <types>
+    <dataTypes />
+    <pous>
+      <pou name="POU" pouType="program">
+        <interface>
+          <localVars>
+            <variable name="greenSec">
+              <type>
+                <WORD />
+              </type>
+              <initialValue>
+                <simpleValue value="3" />
+              </initialValue>
+            </variable>
+            <variable name="greenFlinkSec">
+              <type>
+                <WORD />
+              </type>
+              <initialValue>
+                <simpleValue value="2" />
+              </initialValue>
+            </variable>
+            <variable name="yellowSec">
+              <type>
+                <WORD />
+              </type>
+              <initialValue>
+                <simpleValue value="2" />
+              </initialValue>
+            </variable>
+            <variable name="redSec">
+              <type>
+                <WORD />
+              </type>
+              <initialValue>
+                <simpleValue value="7" />
+              </initialValue>
+            </variable>
+            <variable name="waitSec">
+              <type>
+                <WORD />
+              </type>
+              <initialValue>
+                <simpleValue value="greenSec" />
+              </initialValue>
+            </variable>
+            <variable name="waitTimer">
+              <type>
+                <derived name="TON" />
+              </type>
+            </variable>
+            <variable name="flickTimer">
+              <type>
+                <derived name="TON" />
+              </type>
+            </variable>
+            <variable name="greenLight">
+              <type>
+                <BOOL />
+              </type>
+              <initialValue>
+                <simpleValue value="TRUE" />
+              </initialValue>
+            </variable>
+            <variable name="yellowLight">
+              <type>
+                <BOOL />
+              </type>
+              <initialValue>
+                <simpleValue value="FALSE" />
+              </initialValue>
+            </variable>
+            <variable name="redLight">
+              <type>
+                <BOOL />
+              </type>
+              <initialValue>
+                <simpleValue value="FALSE" />
+              </initialValue>
+            </variable>
+            <variable name="nextStatus">
+              <type>
+                <INT />
+              </type>
+              <initialValue>
+                <simpleValue value="1" />
+              </initialValue>
+            </variable>
+          </localVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">
+waitTimer(IN := NOT waitTimer.Q, PT :=WORD_TO_TIME(waitSec * 1000));
+
+IF waitTimer.Q = TRUE THEN
+	CASE nextStatus OF
+		0:  greenLight := TRUE;
+			yellowLight := redLight := FALSE;
+			waitSec := greenSec;
+			nextStatus := 1;
+		1:	waitSec := greenFlinkSec;
+			nextStatus := 5;
+		5:  yellowLight := TRUE;
+			greenLight := redLight := FALSE;
+			waitSec := yellowSec;
+			nextStatus := 10;
+		10:  redLight := TRUE;
+			greenLight := yellowLight := FALSE;
+			waitSec := redSec;
+			nextStatus := 0;
+	END_CASE	
+END_IF
+
+IF nextStatus = 5 THEN
+	flickTimer(IN := NOT flickTimer.Q, PT := T#500MS);
+	IF flickTimer.Q = TRUE THEN
+		greenLight := NOT greenLight;
+		//IF greenLight = TRUE THEN
+		//	greenLight := FALSE;
+		//ELSE
+		//	greenLight := TRUE;
+		//END_IF
+	END_IF
+END_IF	
+</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>9ba61397-8856-47ad-b92f-ded7a6234210</ObjectId>
+          </data>
+        </addData>
+      </pou>
+    </pous>
+  </types>
+  <instances>
+    <configurations />
+  </instances>
+  <addData>
+    <data name="http://www.3s-software.com/plcopenxml/projectstructure" handleUnknown="discard">
+      <ProjectStructure>
+        <Object Name="POU" ObjectId="9ba61397-8856-47ad-b92f-ded7a6234210" />
+      </ProjectStructure>
+    </data>
+  </addData>
+</project>

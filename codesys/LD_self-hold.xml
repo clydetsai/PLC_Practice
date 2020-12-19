@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://www.plcopen.org/xml/tc6_0200">
+  <fileHeader companyName="" productName="CODESYS" productVersion="CODESYS V3.5 SP15 Patch 3" creationDateTime="2020-12-19T08:50:39.1116389" />
+  <contentHeader name="LD_self-hold.project" modificationDateTime="2020-12-19T08:47:31.8389292">
+    <coordinateInfo>
+      <fbd>
+        <scaling x="1" y="1" />
+      </fbd>
+      <ld>
+        <scaling x="1" y="1" />
+      </ld>
+      <sfc>
+        <scaling x="1" y="1" />
+      </sfc>
+    </coordinateInfo>
+    <addData>
+      <data name="http://www.3s-software.com/plcopenxml/projectinformation" handleUnknown="implementation">
+        <ProjectInformation>
+          <property name="CompiledLibraryCompatibilityVersion" type="string">CODESYS V3.5 SP15 Patch 3</property>
+          <property name="Project" type="string">LD_self-hold</property>
+        </ProjectInformation>
+      </data>
+    </addData>
+  </contentHeader>
+  <types>
+    <dataTypes />
+    <pous>
+      <pou name="POU" pouType="program">
+        <interface>
+          <inputVars>
+            <variable name="X1">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="X2">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+          </inputVars>
+          <outputVars>
+            <variable name="Y1">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+          </outputVars>
+        </interface>
+        <body>
+          <LD>
+            <leftPowerRail localId="0">
+              <position x="0" y="0" />
+              <connectionPointOut formalParameter="none" />
+            </leftPowerRail>
+            <comment localId="1" height="0" width="0">
+              <position x="0" y="0" />
+              <content>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml" />
+              </content>
+            </comment>
+            <vendorElement localId="2">
+              <position x="0" y="0" />
+              <alternativeText>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml" />
+              </alternativeText>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/fbdelementtype" handleUnknown="implementation">
+                  <ElementType xmlns="">networktitle</ElementType>
+                </data>
+              </addData>
+            </vendorElement>
+            <contact localId="3" negated="false" storage="none" edge="none">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="0" />
+              </connectionPointIn>
+              <connectionPointOut />
+              <variable>X1</variable>
+            </contact>
+            <contact localId="4" negated="false" storage="none" edge="none">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="0" />
+              </connectionPointIn>
+              <connectionPointOut />
+              <variable>Y1</variable>
+            </contact>
+            <contact localId="5" negated="true" storage="none" edge="none">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="3" />
+                <connection refLocalId="4" />
+              </connectionPointIn>
+              <connectionPointOut />
+              <variable>X2</variable>
+            </contact>
+            <coil localId="6" negated="false" storage="none">
+              <position x="0" y="0" />
+              <connectionPointIn>
+                <connection refLocalId="5" />
+              </connectionPointIn>
+              <connectionPointOut />
+              <variable>Y1</variable>
+            </coil>
+            <rightPowerRail localId="2147483646">
+              <position x="0" y="0" />
+              <connectionPointIn />
+            </rightPowerRail>
+          </LD>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>7c25ca59-2edc-417b-a8fa-72ba93ee1a18</ObjectId>
+          </data>
+        </addData>
+      </pou>
+    </pous>
+  </types>
+  <instances>
+    <configurations />
+  </instances>
+  <addData>
+    <data name="http://www.3s-software.com/plcopenxml/projectstructure" handleUnknown="discard">
+      <ProjectStructure>
+        <Object Name="POU" ObjectId="7c25ca59-2edc-417b-a8fa-72ba93ee1a18" />
+      </ProjectStructure>
+    </data>
+  </addData>
+</project>
