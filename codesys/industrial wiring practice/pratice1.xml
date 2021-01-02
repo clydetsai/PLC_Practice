@@ -1,0 +1,383 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://www.plcopen.org/xml/tc6_0200">
+  <fileHeader companyName="" productName="CODESYS" productVersion="CODESYS V3.5 SP15 Patch 3" creationDateTime="2021-01-02T12:48:38.0849245" />
+  <contentHeader name="pratice1.project" modificationDateTime="2021-01-02T12:48:06.0795696">
+    <coordinateInfo>
+      <fbd>
+        <scaling x="1" y="1" />
+      </fbd>
+      <ld>
+        <scaling x="1" y="1" />
+      </ld>
+      <sfc>
+        <scaling x="1" y="1" />
+      </sfc>
+    </coordinateInfo>
+    <addData>
+      <data name="http://www.3s-software.com/plcopenxml/projectinformation" handleUnknown="implementation">
+        <ProjectInformation>
+          <property name="CompiledLibraryCompatibilityVersion" type="string">CODESYS V3.5 SP15 Patch 3</property>
+          <property name="Project" type="string">pratice1</property>
+        </ProjectInformation>
+      </data>
+    </addData>
+  </contentHeader>
+  <types>
+    <dataTypes>
+      <dataType name="MACHINESTATUS">
+        <baseType>
+          <enum>
+            <values>
+              <value name="STANDBY" />
+              <value name="RUNNING" />
+              <value name="CLEAR" />
+              <value name="EMS" />
+              <value name="RECOVERY" />
+              <value name="NULLSTATUS" />
+            </values>
+          </enum>
+        </baseType>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/attributes" handleUnknown="implementation">
+            <Attributes>
+              <Attribute Name="qualified_only" Value="" />
+              <Attribute Name="strict" Value="" />
+            </Attributes>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>dd4f29af-5832-44fc-bf6b-bc283ea7449c</ObjectId>
+          </data>
+        </addData>
+      </dataType>
+    </dataTypes>
+    <pous>
+      <pou name="MAIN" pouType="program">
+        <interface>
+          <localVars>
+            <variable name="PL1_M1">
+              <type>
+                <BOOL />
+              </type>
+              <initialValue>
+                <simpleValue value="FALSE" />
+              </initialValue>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> light for M1</xhtml>
+              </documentation>
+            </variable>
+            <variable name="PL2_M2">
+              <type>
+                <BOOL />
+              </type>
+              <initialValue>
+                <simpleValue value="FALSE" />
+              </initialValue>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> light for M2</xhtml>
+              </documentation>
+            </variable>
+            <variable name="PL3_M3">
+              <type>
+                <BOOL />
+              </type>
+              <initialValue>
+                <simpleValue value="FALSE" />
+              </initialValue>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> light for M3</xhtml>
+              </documentation>
+            </variable>
+            <variable name="PL4_Power">
+              <type>
+                <BOOL />
+              </type>
+              <initialValue>
+                <simpleValue value="TRUE" />
+              </initialValue>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> light for Power</xhtml>
+              </documentation>
+            </variable>
+            <variable name="M1">
+              <type>
+                <BOOL />
+              </type>
+              <initialValue>
+                <simpleValue value="FALSE" />
+              </initialValue>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> MOTOR 1</xhtml>
+              </documentation>
+            </variable>
+            <variable name="M2">
+              <type>
+                <BOOL />
+              </type>
+              <initialValue>
+                <simpleValue value="FALSE" />
+              </initialValue>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> MOTOR 2</xhtml>
+              </documentation>
+            </variable>
+            <variable name="M3">
+              <type>
+                <BOOL />
+              </type>
+              <initialValue>
+                <simpleValue value="FALSE" />
+              </initialValue>
+              <documentation>
+                <xhtml xmlns="http://www.w3.org/1999/xhtml"> MOTOR 3</xhtml>
+              </documentation>
+            </variable>
+            <variable name="BZ">
+              <type>
+                <BOOL />
+              </type>
+              <initialValue>
+                <simpleValue value="FALSE" />
+              </initialValue>
+            </variable>
+            <variable name="PB1_Stop">
+              <type>
+                <BOOL />
+              </type>
+              <initialValue>
+                <simpleValue value="FALSE" />
+              </initialValue>
+            </variable>
+            <variable name="PB2_Start">
+              <type>
+                <BOOL />
+              </type>
+              <initialValue>
+                <simpleValue value="FALSE" />
+              </initialValue>
+            </variable>
+            <variable name="PB6_EMS">
+              <type>
+                <BOOL />
+              </type>
+              <initialValue>
+                <simpleValue value="FALSE" />
+              </initialValue>
+            </variable>
+            <variable name="waitSec">
+              <type>
+                <INT />
+              </type>
+            </variable>
+            <variable name="waitTime">
+              <type>
+                <TIME />
+              </type>
+            </variable>
+            <variable name="waitTimer">
+              <type>
+                <derived name="TON" />
+              </type>
+            </variable>
+            <variable name="blinkTimer">
+              <type>
+                <derived name="TON" />
+              </type>
+            </variable>
+            <variable name="M1RunTime">
+              <type>
+                <INT />
+              </type>
+              <initialValue>
+                <simpleValue value="5" />
+              </initialValue>
+            </variable>
+            <variable name="M2RunTime">
+              <type>
+                <INT />
+              </type>
+              <initialValue>
+                <simpleValue value="10" />
+              </initialValue>
+            </variable>
+            <variable name="M3RunTime">
+              <type>
+                <INT />
+              </type>
+              <initialValue>
+                <simpleValue value="5" />
+              </initialValue>
+            </variable>
+            <variable name="status">
+              <type>
+                <derived name="MACHINESTATUS" />
+              </type>
+              <initialValue>
+                <simpleValue value="MACHINESTATUS.STANDBY" />
+              </initialValue>
+            </variable>
+            <variable name="n">
+              <type>
+                <INT />
+              </type>
+            </variable>
+            <variable name="memory">
+              <type>
+                <array>
+                  <dimension lower="1" upper="4" />
+                  <baseType>
+                    <INT />
+                  </baseType>
+                </array>
+              </type>
+            </variable>
+            <variable name="memoryStatus">
+              <type>
+                <derived name="MACHINESTATUS" />
+              </type>
+            </variable>
+            <variable name="memoryTime">
+              <type>
+                <TIME />
+              </type>
+            </variable>
+          </localVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">
+IF PB6_EMS THEN
+    IF status &lt;&gt; MACHINESTATUS.EMS THEN
+        memoryStatus := status;
+        status := MACHINESTATUS.EMS;
+        PL4_Power := TRUE;
+        memory[4] := 0;
+    END_IF
+ELSIF NOT PB6_EMS AND status = MACHINESTATUS.EMS THEN
+    status := MACHINESTATUS.RECOVERY;
+ELSIF PB1_Stop THEN
+    IF status &lt;&gt; MACHINESTATUS.CLEAR THEN
+        status := MACHINESTATUS.CLEAR;
+        M1 := M2 := M3 := PL1_M1 := PL2_M2 := PL3_M3 := PL4_Power := TRUE;
+        waitSec := M1RunTime;
+        waitTimer(IN := FALSE);
+        blinkTimer(IN := FALSE);
+    END_IF;
+ELSIF PB2_Start THEN
+    status := MACHINESTATUS.RUNNING;
+END_IF;
+
+CASE status OF
+    MACHINESTATUS.STANDBY:
+        PL4_Power := TRUE;
+    MACHINESTATUS.RUNNING:
+        IF NOT M1 THEN
+            M1 := PL1_M1 := TRUE;
+            waitSec := M1RunTime;
+        ELSIF NOT M2 AND waitTimer.Q THEN
+            M2 := PL2_M2 := TRUE;
+            waitSec := M2RunTime;
+        ELSIF NOT M3 AND waitTimer.Q THEN
+            M3 := PL3_M3 := PL4_Power := TRUE;
+		END_IF;
+        
+        IF NOT M3 THEN
+            IF waitSec = -1 THEN
+                waitTime := memoryTime;
+            ELSE
+                waitTime := INT_TO_TIME(waitSec * 1000);
+			END_IF
+            waitTimer(IN := NOT waitTimer.Q, PT := waitTime);
+            blinkTimer(IN := NOT blinkTimer.Q, PT := T#500MS);
+            IF blinkTimer.Q THEN
+                PL4_Power := NOT PL4_Power;
+			END_IF;
+		END_IF;
+    MACHINESTATUS.CLEAR:
+        IF M3 THEN
+            IF waitSec = -1 THEN
+                waitTime := memoryTime;
+            ELSE
+                waitTime := INT_TO_TIME(waitSec * 1000);
+			END_IF
+            waitTimer(IN := NOT waitTimer.Q, PT := waitTime);
+            blinkTimer(IN := NOT blinkTimer.Q, PT := T#500MS);
+            IF blinkTimer.Q THEN
+                IF M1 THEN
+                    PL1_M1 := PL4_Power;
+                ELSIF M2 THEN
+                    PL2_M2 := PL4_Power;
+                ELSIF M3 THEN
+                    PL3_M3 := PL4_Power;
+				END_IF;
+                PL4_Power := NOT PL4_Power;
+			END_IF;
+        END_IF;
+        
+        IF M1 AND waitTimer.Q THEN
+            M1 := PL1_M1 := FALSE;
+            waitSec := M2RunTime;
+        ELSIF M2 AND waitTimer.Q THEN
+            M2 := PL2_M2 := FALSE;
+            waitSec := M3RunTime;
+        ELSIF M3 AND waitTimer.Q THEN
+            M3 := PL3_M3 := FALSE;
+            status := MACHINESTATUS.STANDBY;
+		END_IF;
+    MACHINESTATUS.EMS:
+        IF memory[4] &lt;&gt; 1 THEN
+            FOR n := 1 TO 3 DO
+                memory[n] := 0;
+            END_FOR;
+    
+            IF M1 THEN
+                memory[1] := 1;
+            END_IF;
+            IF M2 THEN
+                memory[2] := 1;
+            END_IF;
+            IF M3 THEN
+                memory[3] := 1;
+            END_IF;
+            // save remaining time, then set waitSec to -1, therefore, after recovery, the timer will be set according to pre-saved time.
+            memoryTime := INT_TO_TIME(waitSec*1000) - waitTimer.ET;
+            waitSec := -1;
+            waitTimer(IN := FALSE);
+            blinkTimer(IN := FALSE);
+            memory[4] := 1;
+        END_IF;
+        M1 := M2 := M3 := PL1_M1 := PL2_M2 := PL3_M3 := FALSE;
+    MACHINESTATUS.RECOVERY:
+        IF memory[1] = 1 THEN
+            M1 := PL1_M1 := TRUE;
+		END_IF;
+        IF memory[2] = 1 THEN
+            M2 := PL2_M2 := TRUE;
+		END_IF;
+        IF memory[3] = 1 THEN
+            M3 := PL3_M3 := TRUE;
+		END_IF
+        status := memoryStatus;
+END_CASE;
+</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>23e4fd72-c278-4873-a100-5b7d3ccb39a1</ObjectId>
+          </data>
+        </addData>
+      </pou>
+    </pous>
+  </types>
+  <instances>
+    <configurations />
+  </instances>
+  <addData>
+    <data name="http://www.3s-software.com/plcopenxml/projectstructure" handleUnknown="discard">
+      <ProjectStructure>
+        <Object Name="MAIN" ObjectId="23e4fd72-c278-4873-a100-5b7d3ccb39a1" />
+        <Object Name="MACHINESTATUS" ObjectId="dd4f29af-5832-44fc-bf6b-bc283ea7449c" />
+      </ProjectStructure>
+    </data>
+  </addData>
+</project>
